@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizarra Digital - Plan Anual Expresión Artística 2027</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F6F9;
+            color: #2D3748;
+        }
+        /* Color Palette Constants */
+        .bg-cm-blue { background-color: #1F3C88; }
+        .text-cm-blue { color: #1F3C88; }
+        .border-cm-blue { border-color: #1F3C88; }
+        
+        .bg-cm-sec { background-color: #3F72AF; }
+        .text-cm-sec { color: #3F72AF; }
+        .border-cm-sec { border-color: #3F72AF; }
+        
+        .bg-cm-yellow { background-color: #F2C94C; }
+        .text-cm-yellow { color: #F2C94C; }
+        .border-cm-yellow { border-color: #F2C94C; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E2E8F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3F72AF;
+            border-radius: 4px;
+        }
+
+        /* Strict Italic Styling Utility */
+        .italic-text {
+            font-style: italic;
+        }
+
+        /* Tab Active State */
+        .tab-btn.active {
+            background-color: #F2C94C;
+            color: #1F3C88;
+            font-weight: 700;
+            border-bottom: 4px solid #1F3C88;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-100">
+
+    <!-- Top Header Bar -->
+    <header class="bg-cm-blue text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            
+            <!-- Brand & Info -->
+            <div class="flex items-center space-x-4">
+                <img src="https://admisiones.colegiomontano.edu.gt/assets/img/logo-cm-blanco.webp" 
+                     alt="Colegio Montano" 
+                     class="max-h-12 w-auto object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/180x50/1F3C88/FFFFFF?text=Colegio+Montano';">
+                <div class="border-l border-blue-400/40 pl-4">
+                    <h1 class="text-xl font-bold leading-tight text-white tracking-wide">
+                        <span class="italic-text">PLAN ANUAL DE ASIGNATURA</span>
+                    </h1>
+                    <p class="text-xs text-blue-100 flex flex-wrap gap-x-3 gap-y-1 mt-0.5">
+                        <span><i class="italic-text">Curso:</i> Expresión Artística (Artes Visuales)</span>
+                        <span>•</span>
+                        <span><i class="italic-text">Grado:</i> Segundo Básico</span>
+                        <span>•</span>
+                        <span><i class="italic-text">Docente:</i> Prof. Jorge Barrios</span>
+                        <span>•</span>
+                        <span><i class="italic-text">Ciclo:</i> 2027 (Colegio Montano Cortijo)</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleFullScreen()" 
+                        class="bg-cm-yellow text-cm-blue hover:bg-yellow-400 font-semibold px-4 py-2 rounded-lg text-sm shadow-md transition duration-200 flex items-center gap-2 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                    <span><i class="italic-text">Pantalla Completa</i></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Horizontal Navigation Tabs -->
+    <nav class="bg-white border-b border-gray-200 shadow-sm sticky top-[68px] z-40 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-4 flex whitespace-nowrap scrollbar-none">
+            <button onclick="switchTab('tab-descriptor')" id="btn-tab-descriptor" class="tab-btn active px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">I) Descriptor del Curso</i>
+            </button>
+            <button onclick="switchTab('tab-objetivos')" id="btn-tab-objetivos" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">II) Objetivos Generales</i>
+            </button>
+            <button onclick="switchTab('tab-competencias')" id="btn-tab-competencias" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">III) Competencias</i>
+            </button>
+            <button onclick="switchTab('tab-indicadores')" id="btn-tab-indicadores" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">IV) Indicadores de Logro</i>
+            </button>
+            <button onclick="switchTab('tab-metodos')" id="btn-tab-metodos" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">V) Métodos Didácticos</i>
+            </button>
+            <button onclick="switchTab('tab-bibliografia')" id="btn-tab-bibliografia" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">VI) Bibliografía</i>
+            </button>
+            <button onclick="switchTab('tab-contenidos')" id="btn-tab-contenidos" class="tab-btn px-4 py-3 text-sm font-medium text-gray-600 hover:text-cm-blue transition-colors">
+                <i class="italic-text">VII) Contenidos</i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Canvas / Dashboard Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- I) DESCRIPTOR DEL CURSO -->
+        <section id="tab-descriptor" class="tab-content block space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-4">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">I) Descriptor del Curso</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Enfoque pedagógico, metodología de trabajo y valores institucionales.</i>
+                    </p>
+                </div>
+                <div class="space-y-4 text-gray-700 leading-relaxed">
+                    <p class="bg-blue-50/50 p-4 rounded-lg border-l-4 border-cm-blue">
+                        El curso de Expresión Artística, en su componente de Artes Visuales, desarrolla en los estudiantes de Segundo Básico capacidades de observación, apreciación, imaginación y comunicación mediante producciones gráficas y pictóricas. Se organiza a partir de 8 temas establecidos en la malla curricular institucional de 2027.
+                    </p>
+                    <p>
+                        Cada sesión comienza con la explicación de un tema, estilo o técnica y sus características visuales; posteriormente, el estudiante crea una obra propia empleando principalmente crayones de madera y marcadores. Se permite el uso de materiales alternativos cuando resulte pertinente, sin alterar el propósito de aprendizaje. La obra final constituye una evidencia observable de la aplicación de los conocimientos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Valores Institucionales Promovidos -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <h3 class="text-lg font-bold text-cm-blue mb-4">
+                    <i class="italic-text">Valores y Creencias Institucionales Promovidos</i>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">1</span>
+                        <span class="text-sm"><i class="italic-text">Libertad de decisión con responsabilidad sobre el trabajo artístico.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">2</span>
+                        <span class="text-sm"><i class="italic-text">Lealtad e identificación con la institución educativa.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">3</span>
+                        <span class="text-sm"><i class="italic-text">Respeto, empatía y escucha ante las producciones y opiniones de los compañeros.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">4</span>
+                        <span class="text-sm"><i class="italic-text">Convivencia armónica y cuidado de los materiales y espacios de trabajo.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">5</span>
+                        <span class="text-sm"><i class="italic-text">Respeto por la diversidad cultural y las distintas manifestaciones artísticas.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">6</span>
+                        <span class="text-sm"><i class="italic-text">Análisis y síntesis de las características de cada tema artístico.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">7</span>
+                        <span class="text-sm"><i class="italic-text">Pensamiento crítico y construcción de criterios estéticos personales.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">8</span>
+                        <span class="text-sm"><i class="italic-text">Relación del arte con otras áreas de conocimiento y la vida cotidiana.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">9</span>
+                        <span class="text-sm"><i class="italic-text">Valoración de la diversidad cultural de Guatemala y del mundo.</i></span>
+                    </div>
+                    <div class="flex items-start p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <span class="bg-cm-blue text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 shrink-0">10</span>
+                        <span class="text-sm"><i class="italic-text">Uso responsable de recursos visuales y digitales de consulta, cuando estén disponibles.</i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- II) OBJETIVOS GENERALES -->
+        <section id="tab-objetivos" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">II) Objetivos Generales</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Metas formativas y aspiraciones de desarrollo estético y conceptual.</i>
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-cm-sec text-white px-3 py-1 rounded-bl-lg text-xs font-bold">Objetivo 1</div>
+                        <h4 class="text-lg font-semibold text-cm-blue mb-2"><i class="italic-text">Percepción y Sensibilidad</i></h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            Fortalecer la percepción visual, la observación y la sensibilidad estética mediante la interpretación de imágenes y referentes artísticos.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-cm-sec text-white px-3 py-1 rounded-bl-lg text-xs font-bold">Objetivo 2</div>
+                        <h4 class="text-lg font-semibold text-cm-blue mb-2"><i class="italic-text">Representación y Técnica</i></h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            Desarrollar habilidades de representación, composición y manejo expresivo de los materiales propios de las artes visuales.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-cm-sec text-white px-3 py-1 rounded-bl-lg text-xs font-bold">Objetivo 3</div>
+                        <h4 class="text-lg font-semibold text-cm-blue mb-2"><i class="italic-text">Creatividad y Autonomía</i></h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            Estimular la creatividad, la autonomía y la comunicación de ideas, experiencias y emociones a través de obras personales.
+                        </p>
+                    </div>
+
+                    <div class="p-5 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-cm-sec text-white px-3 py-1 rounded-bl-lg text-xs font-bold">Objetivo 4</div>
+                        <h4 class="text-lg font-semibold text-cm-blue mb-2"><i class="italic-text">Respeto y Valoración Cultural</i></h4>
+                        <p class="text-gray-700 text-sm leading-relaxed">
+                            Promover el respeto por la diversidad de expresiones artísticas, el trabajo responsable y la valoración de las producciones propias y ajenas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- III) COMPETENCIAS -->
+        <section id="tab-competencias" class="tab-content hidden space-y-6">
+            
+            <!-- Competencias Académicas del Curso -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-4">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">III) Competencias Académicas del Área</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Capacidades disciplinares específicas de Expresión Artística.</i>
+                    </p>
+                </div>
+                <div class="space-y-3">
+                    <div class="p-4 bg-gray-50 border-l-4 border-cm-sec rounded-r-lg">
+                        <h4 class="font-bold text-cm-blue text-sm mb-1"><i class="italic-text">Competencia 1</i></h4>
+                        <p class="text-gray-700 text-sm">Reconoce y aplica recursos visuales característicos de distintas manifestaciones y estilos artísticos.</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 border-l-4 border-cm-sec rounded-r-lg">
+                        <h4 class="font-bold text-cm-blue text-sm mb-1"><i class="italic-text">Competencia 2</i></h4>
+                        <p class="text-gray-700 text-sm">Interpreta referentes artísticos y culturales mediante producciones gráficas personales y respetuosas.</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 border-l-4 border-cm-sec rounded-r-lg">
+                        <h4 class="font-bold text-cm-blue text-sm mb-1"><i class="italic-text">Competencia 3</i></h4>
+                        <p class="text-gray-700 text-sm">Integra elementos de composición, creatividad y experimentación en obras gráficas propias.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competencias CM (Institucionales Integradas) -->
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-4">
+                    <h3 class="text-xl font-bold text-cm-blue">
+                        <i class="italic-text">Competencias CM Institucionales (Competencias Blandas)</i>
+                    </h3>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Marco institucional obligatorio de habilidades transversales e integradas al programa educativo.</i>
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 1</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Pensamiento crítico y resolución de problemas</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 2</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Colaboración y trabajo en equipo</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 3</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Competencias digitales</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 4</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Comunicación efectiva</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 5</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Creatividad e innovación</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 6</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Aprendizaje autónomo y adaptabilidad</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 7</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Conciencia global y cultural</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 8</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Ética y ciudadanía digital</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 9</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Gestión emocional y resiliencia</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 10</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Conciencia ecológica y sostenibilidad</p>
+                    </div>
+                    <div class="p-3 bg-yellow-50/60 border border-yellow-200 rounded-lg sm:col-span-2 lg:col-span-1">
+                        <h5 class="font-semibold text-cm-blue text-xs uppercase tracking-wider mb-1"><i class="italic-text">Competencia CM 11</i></h5>
+                        <p class="text-gray-800 text-sm font-medium">Desempeño de roles de liderazgo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IV) INDICADORES DE LOGRO -->
+        <section id="tab-indicadores" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">IV) Indicadores de Logro</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Criterios de evaluación y evidencias de desempeño observables.</i>
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Grupo 1 -->
+                    <div class="border border-blue-100 rounded-xl overflow-hidden">
+                        <div class="bg-cm-blue text-white p-3 font-bold text-sm">
+                            <i class="italic-text">Vinculados a la Competencia 1: Reconocimiento y aplicación de recursos visuales</i>
+                        </div>
+                        <div class="p-4 bg-white space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">1.1</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte guatemalteco, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                            <hr class="border-gray-100">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">1.2</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte mexicano, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                            <hr class="border-gray-100">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">1.3</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte romano, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 2 -->
+                    <div class="border border-blue-100 rounded-xl overflow-hidden">
+                        <div class="bg-cm-sec text-white p-3 font-bold text-sm">
+                            <i class="italic-text">Vinculados a la Competencia 2: Interpretación de referentes artísticos y culturales</i>
+                        </div>
+                        <div class="p-4 bg-white space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">2.1</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte hindú, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                            <hr class="border-gray-100">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">2.2</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte portugués, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                            <hr class="border-gray-100">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">2.3</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte africano, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grupo 3 -->
+                    <div class="border border-blue-100 rounded-xl overflow-hidden">
+                        <div class="bg-slate-700 text-white p-3 font-bold text-sm">
+                            <i class="italic-text">Vinculados a la Competencia 3: Composición, creatividad y autoría propia</i>
+                        </div>
+                        <div class="p-4 bg-white space-y-3">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">3.1</span>
+                                <p class="text-gray-700 text-sm">Representa una composición inspirada en manifestaciones del arte ruso, incorporando elementos visuales contextualizados y respetando su origen cultural.</p>
+                            </div>
+                            <hr class="border-gray-100">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-blue-100 text-cm-blue font-bold px-2 py-0.5 rounded text-xs">3.2</span>
+                                <p class="text-gray-700 text-sm">Crea una obra de temática personal que evidencie decisiones autónomas de composición, color y técnica.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- V) MÉTODOS DIDÁCTICOS (INSTITUCIONALES) -->
+        <section id="tab-metodos" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">V) Métodos Didácticos Institucionales</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Modelo activo-colaborativo y metodología del Período Doble (70 minutos).</i>
+                    </p>
+                </div>
+
+                <!-- 4 Momentos del Período Doble -->
+                <h3 class="text-lg font-bold text-cm-blue mb-4">
+                    <i class="italic-text">Estructura del Período Doble (70 Minutos)</i>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    
+                    <div class="p-4 bg-blue-50/50 border border-blue-200 rounded-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-cm-blue text-white text-xs font-bold px-2.5 py-1 rounded-full">Momento 1</span>
+                            <h4 class="font-bold text-cm-blue"><i class="italic-text">Introducción Motivante</i></h4>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Activación de conocimientos previos mediante preguntas, dinamización, lluvia de ideas, observación de imágenes y presentación clara del tema y sus características.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-blue-50/50 border border-blue-200 rounded-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-cm-blue text-white text-xs font-bold px-2.5 py-1 rounded-full">Momento 2</span>
+                            <h4 class="font-bold text-cm-blue"><i class="italic-text">Trabajo Individual</i></h4>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Desarrollo de potencialidades, habilidades y destrezas individuales mediante la elaboración de una obra pictórica que aplique las características explicadas, con acompañamiento docente.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-blue-50/50 border border-blue-200 rounded-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-cm-blue text-white text-xs font-bold px-2.5 py-1 rounded-full">Momento 3</span>
+                            <h4 class="font-bold text-cm-blue"><i class="italic-text">Trabajo en Equipo / Cooperativo</i></h4>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Intercambio de ideas y observación respetuosa de referentes bajo la consigna <i class="italic-text">"todos para uno y uno para todos"</i>. Apoyo mutuo entre compañeros manteniendo la entrega individual.
+                        </p>
+                    </div>
+
+                    <div class="p-4 bg-blue-50/50 border border-blue-200 rounded-xl">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="bg-cm-blue text-white text-xs font-bold px-2.5 py-1 rounded-full">Momento 4</span>
+                            <h4 class="font-bold text-cm-blue"><i class="italic-text">Plenaria</i></h4>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            Exposición pública, diálogo socrático, lectura previa en casa, presentación voluntaria o rotativa de obras, explicación de decisiones visuales y reflexión crítica sobre aprendizajes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metodologías Clave y Evaluación -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-gray-100">
+                    <div class="p-4 bg-yellow-50/70 border border-yellow-200 rounded-xl">
+                        <h4 class="font-bold text-cm-blue mb-2"><i class="italic-text">Metodologías Clave Institucionales</i></h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li><i class="italic-text">Aprendizaje Basado en Proyectos (ABP).</i></li>
+                            <li><i class="italic-text">Modelo Constructivista y Aprendizaje Significativo.</i></li>
+                            <li><i class="italic-text">Organización temporal en 8 sesiones de clase (octava: Tema libre).</i></li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-gray-200 rounded-xl">
+                        <h4 class="font-bold text-cm-blue mb-2"><i class="italic-text">Enfoque de Evaluación</i></h4>
+                        <p class="text-sm text-gray-700 mb-2">
+                            <i class="italic-text">Evaluación Formativa:</i> Observación continua del proceso, composición, técnica y espacio.
+                        </p>
+                        <p class="text-sm text-gray-700">
+                            <i class="italic-text">Evaluación Sumativa:</i> Valoración de obra final mediante criterios de resolución visual, creatividad y presentación.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VI) BIBLIOGRAFÍA -->
+        <section id="tab-bibliografia" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">VI) Bibliografía y Fuentes de Apoyo</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Obras de referencia para dibujo, teoría del color e historia del arte.</i>
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-4 bg-gray-50/50">
+                        <div class="bg-cm-blue text-white p-3 rounded-lg font-bold text-xs uppercase shrink-0">Libro 1</div>
+                        <div>
+                            <h4 class="font-bold text-cm-blue text-base">Edwards, Betty. (2012)</h4>
+                            <p class="text-gray-800 text-sm font-medium"><i class="italic-text">Drawing on the Right Side of the Brain</i> (4.ª ed.). TarcherPerigee.</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="italic-text">Área de aplicación: Fundamentos de dibujo, percepción espacial y habilidades de representación visual.</i></p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-4 bg-gray-50/50">
+                        <div class="bg-cm-blue text-white p-3 rounded-lg font-bold text-xs uppercase shrink-0">Libro 2</div>
+                        <div>
+                            <h4 class="font-bold text-cm-blue text-base">Itten, Johannes. (1970)</h4>
+                            <p class="text-gray-800 text-sm font-medium"><i class="italic-text">The Elements of Color</i>. Van Nostrand Reinhold.</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="italic-text">Área de aplicación: Teoría del color, contrastes, aplicación armónica de colores de madera y marcadores.</i></p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-gray-200 rounded-xl flex items-start gap-4 bg-gray-50/50">
+                        <div class="bg-cm-blue text-white p-3 rounded-lg font-bold text-xs uppercase shrink-0">Libro 3</div>
+                        <div>
+                            <h4 class="font-bold text-cm-blue text-base">Gombrich, E. H. (1995)</h4>
+                            <p class="text-gray-800 text-sm font-medium"><i class="italic-text">The Story of Art</i> (16.ª ed.). Phaidon Press.</p>
+                            <p class="text-xs text-gray-500 mt-1"><i class="italic-text">Área de aplicación: Historia del arte, contexto cultural de estilos visuales mundiales.</i></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-blue-50/40 rounded-lg text-xs text-cm-sec">
+                    <p><i class="italic-text">Nota bibliográfica: Las obras citadas constituyen fuentes generales de consulta institucional y pedagógica para la enseñanza de artes visuales.</i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VII) CONTENIDOS -->
+        <section id="tab-contenidos" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                <div class="border-b border-gray-100 pb-4 mb-6">
+                    <h2 class="text-2xl font-bold text-cm-blue">
+                        <i class="italic-text">VII) Contenidos Programáticos por Unidad</i>
+                    </h2>
+                    <p class="text-sm text-cm-sec mt-1">
+                        <i class="italic-text">Secuencia temática del ciclo escolar 2027.</i>
+                    </p>
+                </div>
+
+                <!-- Grid de Unidades -->
+                <div class="grid grid-cols-1 gap-6">
+                    
+                    <!-- UNIDAD I: Única unidad activa con contenidos -->
+                    <div class="border-2 border-cm-blue rounded-xl overflow-hidden bg-white shadow-md">
+                        <div class="bg-cm-blue text-white px-5 py-3 flex justify-between items-center">
+                            <h3 class="font-bold text-lg"><i class="italic-text">UNIDAD I — Artes Visuales</i></h3>
+                            <span class="bg-cm-yellow text-cm-blue text-xs font-extrabold px-2.5 py-1 rounded-full">Programada</span>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-xs text-gray-500 mb-4"><i class="italic-text">Desglose de 8 sesiones temáticas de aprendizaje visual y producción artística:</i></p>
+                            <ol class="space-y-2.5">
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Guatemalteco</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Mexicano</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Romano</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Hindú</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">5</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Portugués</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">6</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Africano</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-gray-50 hover:bg-blue-50 transition-colors">
+                                    <span class="w-7 h-7 rounded-full bg-cm-sec text-white text-xs font-bold flex items-center justify-center shrink-0">7</span>
+                                    <span class="text-sm font-medium text-gray-800">Arte Ruso</span>
+                                </li>
+                                <li class="flex items-center gap-3 p-2 rounded-lg bg-yellow-50 border border-yellow-200">
+                                    <span class="w-7 h-7 rounded-full bg-cm-yellow text-cm-blue text-xs font-bold flex items-center justify-center shrink-0">8</span>
+                                    <span class="text-sm font-semibold text-cm-blue">Tema libre</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-cm-blue text-white text-center py-4 text-xs">
+        <p><i class="italic-text">Colegio Montano — Planificación Anual Institucional 2027</i></p>
+    </footer>
+
+    <!-- JavaScript Navigation & Fullscreen Logic -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab content
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Activate selected tab button
+            const targetBtn = document.getElementById('btn-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Error intentando activar pantalla completa: ", err);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
